@@ -331,9 +331,10 @@ class ChatApp {
         const messageElement = document.createElement('div');
         messageElement.className = `message ${message.sender}`;
 
-        const time = new Date(message.created_at).toLocaleTimeString([], {
+        const time = new Date(message.created_at).toLocaleTimeString('ar-EG', {
             hour: "2-digit",
             minute: "2-digit",
+            timeZone: 'Africa/Cairo'
         });
 
         const avatarContent = message.sender === "user"
