@@ -9,8 +9,8 @@
     @stack('css')
 </head>
 
-<body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click"
-    data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern content-left-sidebar chat-application  menu-expanded fixed-navbar"
+    data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar">
 
     <!-- Header -->
     @include('partials.dashboard._header')

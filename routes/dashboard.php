@@ -1,21 +1,29 @@
 <?php
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\
+{
+    ChatController,
+    WelcomeController
+};
 use Illuminate\Support\Facades\Route;
 
-Route::group([
-    'prefix' => '/dashboard',
-    'as' => 'dashboard.',
-], function () {
-    // Main dashboard route
-    Route::get('/', function () {
-        return view('dashboard.welcome');
-    })->middleware(['auth'])->name('index');
+Route::group(['prefix' => '/dashboard', 'as' => 'dashboard.'], function () {
 
-    // Profile routes
+    ############################################# AUTHENTICATED ROUTES #############################################
     Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        ############################################# WELCOME ROUTES #############################################
+        Route::get('/', WelcomeController::class)->name('index');
+
+        ############################################# CHATS ROUTES #############################################
+        Route::controller(ChatController::class)->prefix('chat')->name('chat.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/start', 'startChat')->name('start');
+            Route::get('/history', 'getChatHistory')->name('history');
+            Route::get('/{chat}/messages', 'getMessages')->name('messages');
+            Route::post('/{chat}/send', 'sendMessage')->name('send');
+            Route::delete('/{chat}', 'deleteChat')->name('delete');
+        });
+
     });
 
     require __DIR__ . '/auth.php';

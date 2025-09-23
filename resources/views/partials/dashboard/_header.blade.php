@@ -211,11 +211,14 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="mr-1">Hello,
-                                <span class="user-name text-bold-700">{{ Auth::guard('web')->user()->name }}</span>
+                                <span class="user-name text-bold-700">{{ Auth::user()->name }}</span>
                             </span>
-                            <span class="avatar avatar-online">
-                                <img src="{{ asset('assets/dashboard/images/portrait/small/avatar-s-19.png') }}"
-                                    alt="avatar"><i></i></span>
+                            <span
+                                class="d-inline-flex align-items-center justify-content-center rounded-circle bg-secondary text-white fw-bold"
+                                style="width: 40px; height: 40px;">
+                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            </span>
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
                                     class="ft-user"></i> Edit Profile</a>
