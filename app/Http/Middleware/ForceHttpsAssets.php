@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ForceHttps
+class ForceHttpsAssets
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,10 @@ class ForceHttps
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Force HTTPS in production
-        if (config('app.env') === 'production' && !$request->secure()) {
+        // Force HTTPS for assets only in production
+        if (config('app.env') === 'production' &&
+            $request->is('assets/*') &&
+            !$request->secure()) {
             return redirect()->secure($request->getRequestUri());
         }
 

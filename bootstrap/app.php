@@ -15,9 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Force HTTPS in production
+        // Force HTTPS for assets only
         $middleware->web(append: [
-            \App\Http\Middleware\ForceHttps::class,
+            \App\Http\Middleware\ForceHttpsAssets::class,
         ]);
 
         /**** GUEST MIDDLEWARE ****/
