@@ -43,7 +43,7 @@ RUN php artisan route:cache
 RUN php artisan view:cache
 
 # Expose port
-EXPOSE 8000
+EXPOSE $PORT
 
-# Start Laravel server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Start Laravel server with dynamic port
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
