@@ -138,17 +138,13 @@
     </div>
 @endsection
 
-@push('css')
-    @vite(['resources/css/chat.css'])
-@endpush
+@vite(['resources/css/chat.css'])
 
-@push('js')
-    <script>
-        // Pass user data to JavaScript
-        window.userData = {
-            name: '{{ Auth::user()->name }}',
-            id: {{ Auth::id() }}
-        };
-    </script>
-    @vite(['resources/js/chat.js'])
-@endpush
+<script>
+    // Pass user data to JavaScript
+    window.userData = {
+        name: '{{ Auth::user()->name }}',
+        id: {{ Auth::id() }}
+    };
+</script>
+@vite(['resources/js/chat.js'])
