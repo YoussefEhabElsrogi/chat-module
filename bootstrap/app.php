@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Force HTTPS in production
+        $middleware->web(append: [
+            \App\Http\Middleware\ForceHttps::class,
+        ]);
+
         /**** GUEST MIDDLEWARE ****/
         $middleware->redirectGuestsTo(function () {
             return route('dashboard.login');
@@ -22,7 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         /**** USER MIDDLEWARE ****/
         $middleware->redirectUsersTo(function () {
-            return route('dashboard.index');
+            return route('dashboard.chat.index');
         });
 
 
