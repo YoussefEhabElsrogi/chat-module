@@ -1,5 +1,5 @@
-# Use PHP 8.2 with Apache
-FROM php:8.2-apache
+# Use PHP 8.2 CLI
+FROM php:8.2-cli
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -43,36 +43,10 @@ RUN php artisan route:cache
 RUN php artisan view:cache
 
 # Set proper permissions
-RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Configure Apache for Laravel
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot /var/www/html/public\n\
-    <Directory /var/www/html/public>\n\
-        AllowOverride All\n\
-        Require all granted\n\
-        Options -Indexes\n\
-    </Directory>\n\
-    <Directory /var/www/html/public/assets>\n\
-        AllowOverride None\n\
-        Require all granted\n\
-        Options -Indexes\n\
-    </Directory>\n\
-    <Directory /var/www/html/public/build>\n\
-        AllowOverride None\n\
-        Require all granted\n\
-        Options -Indexes\n\
-    </Directory>\n\
-    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
-    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
-
 # Expose port
-EXPOSE 80
+EXPOSE 8000
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start Laravel server with server.php for static files
+CMD php -S 0.0.0.0:8000 -t public public/server.php
