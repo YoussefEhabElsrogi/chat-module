@@ -1,0 +1,30 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BAN9z5Ec.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/chat.css": {
+    "file": "assets/chat-BF1cCjde.css",
+    "src": "resources/css/chat.css",
+    "isEntry": true,
+    "names": [
+      "chat.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CXDpL9bK.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/chat.js": {
+    "file": "assets/chat-DaDfNY2v.js",
+    "name": "chat",
+    "src": "resources/js/chat.js",
+    "isEntry": true
+  }
+}
