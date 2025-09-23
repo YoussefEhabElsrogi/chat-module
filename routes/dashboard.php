@@ -1,18 +1,12 @@
 <?php
-use App\Http\Controllers\Dashboard\
-{
-    ChatController,
-    WelcomeController
-};
+
+use App\Http\Controllers\Dashboard\ChatController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/dashboard', 'as' => 'dashboard.'], function () {
 
     ############################################# AUTHENTICATED ROUTES #############################################
     Route::middleware('auth')->group(function () {
-
-        ############################################# WELCOME ROUTES #############################################
-        Route::get('/', WelcomeController::class)->name('index');
 
         ############################################# CHATS ROUTES #############################################
         Route::controller(ChatController::class)->prefix('chat')->name('chat.')->group(function () {
